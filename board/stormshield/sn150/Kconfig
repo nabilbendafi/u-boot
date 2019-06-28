@@ -1,0 +1,12 @@
+if TARGET_SN150
+
+config SYS_BOARD
+	default "sn150"
+
+config SYS_VENDOR
+	default "stormshield"
+
+config SYS_CONFIG_NAME
+	default "sn150"
+
+endif

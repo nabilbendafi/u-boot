@@ -60,6 +60,7 @@ dtb-$(CONFIG_KIRKWOOD) += \
 	kirkwood-openrd-client.dtb \
 	kirkwood-openrd-ultimate.dtb \
 	kirkwood-pogo_e02.dtb \
+	kirkwood-rd88f6281-z0.dtb \
 	kirkwood-sheevaplug.dtb
 
 dtb-$(CONFIG_ARCH_OWL) += \

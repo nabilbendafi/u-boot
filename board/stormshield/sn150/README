@@ -1,0 +1,50 @@
+How to use U-Boot on Stormshield SN150
+--------------------------------------
+
+This file contains information for the port of U-Boot to Stormshield SN150 board.
+
+0. Board specifications
+-----------------------
+
+  - Marvell SoC Kirkwood 88F6281 revision A1
+  - 512MB SDRAM
+  - 512KiB Macronix MX25L4005 SPI NOR Flash
+  - Gigabit Ethernet Switch 88E6172 with 5 PHYs
+
+1. Building U-Boot
+------------------
+
+- Build U-Boot for Stormshield SN150 board:
+
+$ make mrproper
+$ make sn150_defconfig
+$ make
+
+This will generate the following binaries:
+
+- u-boot.kwb
+
+2. Boot over serial link
+------------------------
+
+Install u-boot-tools and use kwboot binary to load u-boot.kwb
+
+$ kwboot -p -t -B 115200 /dev/ttyUSB0 -b u-boot.kwb
+
+Update from original SNS U-Boot to mainline U-Boot:
+---------------------------------------------------
+
+To update the SPI NOR flash, please use the following
+command:
+
+=> sf probe 1
+=> tftpboot 2000000 sn150/u-boot.kwb
+=> sf update 2000000 0 80000
+
+Note that the original Marvell U-Boot seems to have
+problems with the "sf update" command. This does not
+work reliable. So here this command should be used:
+
+=> sf probe
+=> tftpboot 2000000 sn150/u-boot.kwb
+=> sf erase 0 80000; sf write 2000000 0 80000
